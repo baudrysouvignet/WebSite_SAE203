@@ -1,0 +1,63 @@
+header {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100px;
+
+    padding: 35px 0;
+    box-sizing: border-box;
+
+    background-color: var(--black);
+
+    justify-content: space-between;
+}
+
+header img {
+    cursor: pointer;
+}
+
+header, nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav {
+    gap: 55px;
+}
+
+header div {
+    position: relative;
+}
+
+header div > span{
+    display: none;
+    position: absolute;
+    padding-left: 48px;
+    margin-top: 50%;
+    transition: 0.7s;
+}
+
+header div:hover > span {
+    display: unset;
+}
+
+header a {
+    color: var(--white);
+    font-size: 30px;
+    text-decoration: none;
+}
+
+header a:hover {
+    color: var(--secondary);
+    opacity: 1 !important;
+    font-size: 30px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav a:not(.active) {
+    opacity: 0.3;
+}
