@@ -46,16 +46,14 @@ header div:hover > span {
 
 header a {
     color: var(--white);
-    font-size: 30px;
+    font-size: 25px;
     text-decoration: none;
+    transition: 0.3s;
 }
 
 header a:hover {
     color: var(--secondary);
     opacity: 1 !important;
-    font-size: 30px;
-    text-decoration: none;
-    transition: 0.3s;
 }
 
 nav a:not(.active) {

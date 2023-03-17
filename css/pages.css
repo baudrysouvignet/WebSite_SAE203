@@ -23,11 +23,12 @@
     padding-bottom: 10px;
     border-bottom: solid 1px rgba(29, 29, 27, 0.3);
 }
-
+/* Désactivation d'un lien */
 .nav a.inactif {
     opacity: 0.3;
     transition: 0.5s;
 }
+/* Mise en évidence d'un lien au survol */
 .nav a:hover {
     color: var(--main);
     opacity: 1;
@@ -41,30 +42,107 @@ article {
     display: flex;
     align-items: end;
     gap: 50px;
+    cursor: pointer;
+}
+
+article:hover h2 {
+    color: var(--main);
 }
 
 article img {
-    height: 105px;
     width: 195px;
     object-fit: cover;
+    height: 130px;
+}
+
+/* La limite de 2 lignes et demie pour les paragraphes */
+article p, article h2 {
+    transition: 0.5s;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    max-height: 2.5em;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 article p {
     margin-top: 20px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    max-height: 2.5em; /* Hauteur maximale de deux lignes et demi */
-    text-overflow: ellipsis;
-    overflow: hidden;
+    height: 36px;
 
 }
 
 article h2 {
     margin-top: 10px;
     font-weight: 700;
+    height: 62px;
 }
 
+/* Marges des articels  */
 article:not(article:first-child){
     margin-top: 50px;
+}
+
+
+/* aside */
+
+aside {
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    padding: 0 77px;
+    box-sizing: border-box;
+    width: calc(38% - 77px);
+    height: 100vh;
+
+    border-left: solid 1px rgba(29, 29, 27, 0.3);
+}
+
+aside .state {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+aside .state > div {
+    border-radius: 20px;
+    flex-grow: 1;
+    height: 105px;
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+aside .state > div i,
+aside .state > div span{
+    font-weight: 700;
+    font-size: 25px;
+}
+
+aside h2{
+    font-size: 30px;
+    margin-top: 70px;
+}
+
+aside .tag {
+    margin-top: 32px;
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+}
+
+aside .tag a {
+    color: var(--black);
+    background-color: white;
+}
+aside .tag a:hover,
+aside .tag a:hover *{
+    color: var(--white) !important;
 }
