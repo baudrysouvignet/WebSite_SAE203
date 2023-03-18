@@ -17,13 +17,15 @@
             $id = $value['id_tag'];
             $icon = $value['icon'];
             $nom = str_replace(' ', '&nbsp;', $value['nom']); /*remplacer les espaces par des espces inséquable*/
+            $class = 'link';
+
             if ($page == 'pages.php'){
-                $value = $_GET['id'] == $value['id_tag'] ? 'active' : 'no-active';
+                $class = $_GET['id'] == $value['id_tag'] ? 'active' : 'no-active';
             }
 
             echo <<<HTML
 <div>
-    <a href="pages.php?id=$id" class="$value"><i class="fa-solid fa-$icon"></i></a>
+    <a href="pages.php?id=$id" class="$class"><i class="fa-solid fa-$icon"></i></a>
     <span><span class="color">#</span>$nom</span>
 </div>
 HTML;

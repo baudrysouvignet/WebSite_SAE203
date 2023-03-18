@@ -1,9 +1,4 @@
-.content {
-    width: calc(100% - 200px);
 
-    margin-top: 50px;
-    margin-left: 150px;
-}
 
 .head, .nav {
     width: 62%;

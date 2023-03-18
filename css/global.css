@@ -19,12 +19,12 @@ body{
     --black: #1D1D1B;
     --white: #F5F5F5;
 
-    --main: #0285FE;
-    --secondary: #FF6A1C;
+    --main: #8BC7FF;
+    --secondary: #C44300;
 }
 
 
-h1, h2, span, a {
+h1, h2, span, a, textarea:not(.article), label {
     font-family: "rival-sans", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -36,7 +36,8 @@ h1, h2, span, a {
 /*
 class utilitaire*/
 
-a{
+a, .button{
+    border: none;
     cursor: pointer;
     color: var(--black);
     text-decoration: none;
@@ -50,14 +51,36 @@ a{
     font-size: 50px;
 }
 
-a.button {
+.button {
     background-color: var(--main);
     border-radius: 50px;
     padding: 10px 30px;
     transition: 0.5s;
+    color: var(--black);
+}
+.button:hover {
+    background-color: var(--secondary);
     color: var(--white);
 }
-a.button:hover {
-    background-color: var(--secondary);
-    color: var(--black);
+
+.content {
+    width: calc(100% - 200px);
+
+    margin-top: 50px;
+    margin-left: 150px;
+}
+
+.filtre {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    z-index: 15;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(29, 29, 27, 0.25);
+}
+
+.filtre.unactive {
+    display: none;
 }
