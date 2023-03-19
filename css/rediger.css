@@ -13,14 +13,19 @@ textarea:focus {
     outline: none;
 }
 
+form {
+    height: calc(100% - 50px);
+}
+
 form > textarea {
     background-color: transparent;
     border: none;
-    width: 45%;
+    width: 60%;
     resize: none;
 }
 
 form > textarea.article {
+    margin-top: 20px;
     font-size: 20px;
     flex-grow: 1;
 }
@@ -55,7 +60,6 @@ form > textarea.article {
 
 .popup input:not(input[type="submit"]) {
     width: -webkit-fill-available;
-    padding: 15px 30px;
 
     margin-bottom: 30px;
     margin-top: 10px;
@@ -63,4 +67,31 @@ form > textarea.article {
 
 .popup input[type="submit"]{
     margin: 30px auto 0px auto ;
+}
+
+
+/*tags*/
+
+.tag {
+    display: flex;
+    gap: 50px;
+}
+
+.tag label {
+    margin-right: 15px;
+    opacity: 0.3;
+}
+
+.tag input, .popup input:not(input[type="submit"]){
+    padding: 15px 30px;
+}
+
+select {
+    padding: 16px 30px;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid rgb(118, 118, 118);
+    appearance: none;
+
+    font-size: 12px;
 }

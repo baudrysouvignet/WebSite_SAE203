@@ -45,7 +45,7 @@ $tab_tag_asso = $requete_prepare->fetchAll ( PDO::FETCH_ASSOC );
 $requete_prepare -> closeCursor ();
 
 // Requête SQL pour récupérer les articles associés au tag, avec le nombre de vues
-$requete_prepare = $bdd->prepare ( 'SELECT DISTINCT COUNT(DISTINCT vues.ip) as vues, Articles.id_article, Articles.titre, Articles.contenue, Articles.img, UPPER(Ecrivains.nom) AS nom, Ecrivains.prenom, Articles.date 
+$requete_prepare = $bdd->prepare ( 'SELECT DISTINCT COUNT(DISTINCT vues.ip) as vues, Articles.id_article, Articles.titre, Articles.contenue, Articles.img, UPPER(Ecrivains.nom) AS nom,Ecrivains.id_ecrivains, Ecrivains.prenom, Articles.date 
 FROM Articles
 LEFT JOIN vues ON Articles.id_article = vues.vue_id_article
 JOIN Ecrivains ON Articles.article_id_ecrivain = Ecrivains.id_ecrivains 
@@ -107,12 +107,14 @@ HTML;
             // formatage de la date au format jj/mm/aaaa
             $date_fr = date ( 'd/m/Y' , strtotime ( $article[ "date" ] ) );
 
+            $id_ecrivain = sprintf("%04d", $article["id_ecrivains"]);
+
             // affichage de chaque article avec les informations correspondantes
             echo <<<HTML
 <article>
-    <img src="img/{$article["img"]}" alt="l'image decris {$article["titre"]}">
+    <div class="img" style="background-image: url('{$article["img"]}')"></div>
     <div class="info">
-        <span>Redigé par {$article["nom"]} $prenom - $date_fr</span>
+        <span>Redigé par {$article["nom"]} $prenom <span class="color">#$id_ecrivain</span> - $date_fr</span>
         <h2>{$article["titre"]}</h2>
         <p>{$article["contenue"]}</p>
     </div>
@@ -144,7 +146,7 @@ HTML;
             </div>
         </div>
 
-        <h2>Meilleurs <span class="color">tag</span> associé</h2>
+        <h2>D'autres <span class="color">#sujet</span></h2>
         <div class="tag">
             <?php
             foreach ($tab_tag_asso as $value){

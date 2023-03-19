@@ -44,10 +44,18 @@ article:hover h2 {
     color: var(--main);
 }
 
-article img {
+article .img {
+    position: absolute;
     width: 195px;
-    object-fit: cover;
     height: 130px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+article .info {
+    margin-left: 245px;
+    width: calc(100% - 245px);
 }
 
 /* La limite de 2 lignes et demie pour les paragraphes */

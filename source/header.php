@@ -8,7 +8,7 @@
     <img src="img/WLogo.svg" alt="Logo de l'entreprise">
     <nav>
         <div>
-            <a href="index.php" class="<?php echo $page == 'index.php' ? 'active' : 'no-active' ?>"><i class="fa-regular fa-home"></i></a>
+            <a href="index.php" class="<?php echo $page == 'index.php' ? 'active' : 'no-active' ?>"><i class="fa-solid fa-home"></i></a>
             <span>Accueil</span>
         </div>
 

@@ -22,3 +22,16 @@ elements.forEach(function(element) {
         }
     });
 });
+
+
+
+function showInput(type) {
+    const select = document.getElementById("select_"+type);
+    const label = document.getElementById("label_select_"+type);
+    const inputContainer = document.getElementById("input-container_"+type);
+    if (select.value === "autre") {
+        inputContainer.style.display = "block";
+        select.style.display = "none";
+        label.style.display = "none";
+    }
+}
