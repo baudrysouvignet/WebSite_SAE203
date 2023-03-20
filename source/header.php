@@ -30,11 +30,6 @@
 </div>
 HTML;
         } ?>
-
-        <div>
-            <a href="#"><i class="fa-solid fa-ellipsis"></i></a>
-            <span>Plus&nbsp;d'articles</span>
-        </div>
     </nav>
     <div>
         <a href="rediger.php"><i class="fa-solid fa-pen-to-square"></i></a>

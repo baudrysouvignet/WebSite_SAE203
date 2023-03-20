@@ -11,7 +11,7 @@ if ( ! isset( $_GET[ 'id' ] ) ) {
 
 // Gestion du système de tri des données
 $filtres = [1 => 'Les plus vues' , 2 => 'Nouveauté' , 3 => 'Notre selection'];
-$groupeby = 'ORDER BY Vues';
+$groupeby = 'ORDER BY vues_nbr';
 $trie = 1;
 if ( isset( $_GET[ 'trie' ] ) ) {
     $trie = $_GET[ 'trie' ];
@@ -19,7 +19,7 @@ if ( isset( $_GET[ 'trie' ] ) ) {
     // Selon la valeur de $_GET['trie'], on modifie la clause ORDER BY de la requête SQL
     switch ($trie) {
         case (1):
-            $groupeby = 'ORDER BY Vues DESC';
+            $groupeby = 'ORDER BY vues_nbr DESC';
             break;
         case (2):
             $groupeby = 'ORDER BY date DESC';
@@ -45,7 +45,7 @@ $tab_tag_asso = $requete_prepare->fetchAll ( PDO::FETCH_ASSOC );
 $requete_prepare -> closeCursor ();
 
 // Requête SQL pour récupérer les articles associés au tag, avec le nombre de vues
-$requete_prepare = $bdd->prepare ( 'SELECT DISTINCT COUNT(DISTINCT vues.ip) as vues, Articles.id_article, Articles.titre, Articles.contenue, Articles.img, UPPER(Ecrivains.nom) AS nom,Ecrivains.id_ecrivains, Ecrivains.prenom, Articles.date 
+$requete_prepare = $bdd->prepare ( 'SELECT DISTINCT COUNT(DISTINCT vues.id_vue) as vues_nbr, Articles.id_article, Articles.titre, Articles.contenue, Articles.img, UPPER(Ecrivains.nom) AS nom,Ecrivains.id_ecrivains, Ecrivains.prenom, Articles.date 
 FROM Articles
 LEFT JOIN vues ON Articles.id_article = vues.vue_id_article
 JOIN Ecrivains ON Articles.article_id_ecrivain = Ecrivains.id_ecrivains 
@@ -108,13 +108,14 @@ HTML;
             $date_fr = date ( 'd/m/Y' , strtotime ( $article[ "date" ] ) );
 
             $id_ecrivain = sprintf("%04d", $article["id_ecrivains"]);
+            $link =$article['id_article'];
 
             // affichage de chaque article avec les informations correspondantes
             echo <<<HTML
-<article>
+<article onclick="window.location.href='article.php?id=$link'">
     <div class="img" style="background-image: url('{$article["img"]}')"></div>
     <div class="info">
-        <span>Redigé par {$article["nom"]} $prenom <span class="color">#$id_ecrivain</span> - $date_fr</span>
+        <span>Redigé par {$article["nom"]} $prenom <span class="color">@$id_ecrivain</span> - $date_fr</span>
         <h2>{$article["titre"]}</h2>
         <p>{$article["contenue"]}</p>
     </div>
@@ -135,7 +136,7 @@ HTML;
                     $somme = 0;
 
                     foreach ($tab_acrticles as $article) {
-                        $somme += $article['vues'];
+                        $somme += $article['vues_nbr'];
                     }
                     echo $somme
                     ?></span>
