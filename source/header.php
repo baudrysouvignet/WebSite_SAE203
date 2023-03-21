@@ -31,9 +31,15 @@
 HTML;
         } ?>
     </nav>
-    <div>
-        <a href="rediger.php"><i class="fa-solid fa-pen-to-square"></i></a>
-        <span>Rediger&nbsp;votre&nbsp;article</span>
-    </div>
+    <nav>
+        <div>
+            <a href="rediger.php"><i class="fa-solid fa-pen-to-square"></i></a>
+            <span>Rediger&nbsp;votre&nbsp;article</span>
+        </div>
+        <div>
+            <a href="account.php"><i class="fa-solid fa-gear"></i></a>
+            <span>Reglage&nbsp;de&nbsp;votre&nbsp;compte</span>
+        </div>
+    </nav>
 
 </header>

@@ -24,6 +24,11 @@ form > textarea {
     resize: none;
 }
 
+form p {
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
 form > textarea.article {
     margin-top: 20px;
     font-size: 20px;

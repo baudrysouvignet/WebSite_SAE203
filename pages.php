@@ -11,7 +11,7 @@ if ( ! isset( $_GET[ 'id' ] ) ) {
 
 // Gestion du système de tri des données
 $filtres = [1 => 'Les plus vues' , 2 => 'Nouveauté' , 3 => 'Notre selection'];
-$groupeby = 'ORDER BY vues_nbr';
+$groupeby = 'ORDER BY vues_nbr DESC';
 $trie = 1;
 if ( isset( $_GET[ 'trie' ] ) ) {
     $trie = $_GET[ 'trie' ];
@@ -38,11 +38,14 @@ $res_nom = $requete_prepare->fetch ( PDO::FETCH_ASSOC );
 $requete_prepare -> closeCursor ();
 
 // Requête SQL pour récupérer les tag assoicé
-$requete_prepare = $bdd->prepare ( 'SELECT tag.id_tag, Tag.nom FROM tag, Articles, Vconnect WHERE Tag.id_tag = Vconnect.id_tag AND Articles.id_article = Vconnect.id_article AND tag.id_tag != :tag_id ORDER BY RAND () LIMIT 10;' );
+
+$tab_tag_asso = $tab_ecrivains = prepare ($bdd,'fetchAll', 'SELECT tag.id_tag, Tag.nom FROM tag, Articles, Vconnect WHERE Tag.id_tag = Vconnect.id_tag AND Articles.id_article = Vconnect.id_article AND tag.id_tag != :tag_id ORDER BY RAND () LIMIT 10;' ,[':tag_id' => $_GET['id']] );
+
+/*$requete_prepare = $bdd->prepare ( 'SELECT tag.id_tag, Tag.nom FROM tag, Articles, Vconnect WHERE Tag.id_tag = Vconnect.id_tag AND Articles.id_article = Vconnect.id_article AND tag.id_tag != :tag_id ORDER BY RAND () LIMIT 10;' );
 $requete_prepare->bindValue ( ':tag_id' , $_GET[ 'id' ] , PDO::PARAM_INT );
 $requete_prepare->execute ();
 $tab_tag_asso = $requete_prepare->fetchAll ( PDO::FETCH_ASSOC );
-$requete_prepare -> closeCursor ();
+$requete_prepare -> closeCursor ();*/
 
 // Requête SQL pour récupérer les articles associés au tag, avec le nombre de vues
 $requete_prepare = $bdd->prepare ( 'SELECT DISTINCT COUNT(DISTINCT vues.id_vue) as vues_nbr, Articles.id_article, Articles.titre, Articles.contenue, Articles.img, UPPER(Ecrivains.nom) AS nom,Ecrivains.id_ecrivains, Ecrivains.prenom, Articles.date 
@@ -65,6 +68,10 @@ $requete_prepare -> closeCursor ();
     <meta charset="UTF-8">
     <title>News</title>
     <link rel="stylesheet" href="https://use.typekit.net/kmv3lzq.css">
+
+    <meta name="description" content="Rédigez votre article sur notre site web. Découvrez nos astuces et conseils pour améliorer votre contenu et attirer plus de lecteurs.">
+    <meta name="keywords" content="Rédaction, Article, Astuces, Conseils, Contenu, Lecteurs">
+    <meta name="author" content="Souvignet Baudry">
 
     <link rel="stylesheet" href="css/global.css">
 

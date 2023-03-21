@@ -52,6 +52,9 @@ if (empty($tab_vues) || ((int) DateTime::createFromFormat('d/m/y H:i', $tab_vues
     <meta charset="UTF-8">
     <title>News</title>
     <link rel="stylesheet" href="https://use.typekit.net/kmv3lzq.css">
+    <meta name="description" content="Découvrez nos articles, apprenez-en plus sur les détails, les avantages et les astuces pour mieux comprendre le mode.">
+    <meta name="keywords" content="Article, Lecture, Sujet, Détails, Avantages, Astuces, Compréhension">
+    <meta name="author" content="Souvignet Baudry">
 
     <link rel="stylesheet" href="css/global.css">
 

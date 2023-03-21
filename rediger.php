@@ -72,11 +72,12 @@ include 'source/header.php'; ?> <!--importation du header-->
             ?>
             <div class="tag_X">
                 <label for="file-upload">Image :</label>
-                <input type="text" id="file-upload" name="file-upload" placeholder="URL Unsplash (https://images.unsplash.com/)">
+                <input type="text" id="file-upload" name="file-upload" placeholder="URL Unsplash (https://images.unsplash.com/)" required>
             </div>
         </div>
 
         <div class="popup unactive" id="popup">
+            <p>La publiaction d'un article est une action definitive</p>
             <label for="nom">Nom</label>
             <input type="text" placeholder="Souvignet" name="nom" id="nom" required>
 

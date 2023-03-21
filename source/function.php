@@ -9,3 +9,17 @@ function compare( $data1, $data2, $respos, $resneg){
         return $resneg;
     }
 }
+
+function prepare($bdd, $fetch, $sql, $tab){
+    $requete_prepare = $bdd->prepare ( $sql);
+
+    foreach ($tab as $key => $val){
+        $requete_prepare->bindValue ($key , $val , PDO::PARAM_INT );
+    }
+
+    $requete_prepare->execute ();
+    $tab_ecrivains = $requete_prepare->$fetch( PDO::FETCH_ASSOC );
+    $requete_prepare -> closeCursor ();
+
+    return $tab_ecrivains;
+}
