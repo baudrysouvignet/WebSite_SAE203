@@ -14,7 +14,7 @@ function prepare($bdd, $fetch, $sql, $tab){
     $requete_prepare = $bdd->prepare ( $sql);
 
     foreach ($tab as $key => $val){
-        $requete_prepare->bindValue ($key , $val , PDO::PARAM_INT );
+        $requete_prepare->bindValue ($key , $val );
     }
 
     $requete_prepare->execute ();

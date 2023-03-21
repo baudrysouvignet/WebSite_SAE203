@@ -1,11 +1,8 @@
+
 <?php
 /// Requête SQL pour récupérer les écrivains
-$requete_prepare = $bdd->prepare('SELECT * FROM Ecrivains WHERE Ecrivains.nom = :nom AND Ecrivains.prenom = :prenom;');
-$requete_prepare->bindValue(':nom', strtolower($_POST['nom']), PDO::PARAM_STR);
-$requete_prepare->bindValue(':prenom', strtolower($_POST['prenom']), PDO::PARAM_STR);
-$requete_prepare->execute();
-$res_ecrivains = $requete_prepare->fetchAll(PDO::FETCH_ASSOC);
-$requete_prepare->closeCursor();
+
+$res_ecrivains = prepare ($bdd, 'fetchAll', 'SELECT * FROM Ecrivains WHERE Ecrivains.nom = :nom AND Ecrivains.prenom = :prenom;', [':nom'=>strtolower($_POST['nom']),':prenom' => strtolower($_POST['prenom']) ], 'PDO::PARAM_STR');
 
 // Si on a trouvé des écrivains correspondant aux noms et prénoms fournis
 if (!empty($res_ecrivains)) {

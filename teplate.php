@@ -13,6 +13,8 @@ include 'source/function.php';
 
     <link rel="stylesheet" href="css/global.css">
 
+    <link rel="shortcut icon" href="img/WLogo.ico" />
+
     <link rel="stylesheet" href="css/header.css">
 </head>
 

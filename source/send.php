@@ -1,5 +1,6 @@
 <?php
 require '../config/connection.php';
+require 'function.php';
 
 if ( ! isset( $_POST[ 'title' ] ) ) {
     header ( 'Location: ../index.php' );

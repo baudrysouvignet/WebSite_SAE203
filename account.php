@@ -5,23 +5,30 @@ include 'source/function.php';
 
 if (isset($_POST['prenom'])){
     include 'source/verif_compte.php';
-
     if (isset($id_nom)){
         // Requête SQL pour récupérer toutes les info de l'utilisateur
+        if (isset($_POST['new_nom']) && $_POST['new_prenom'] && (strtolower($_POST['new_nom']) != strtolower($_POST['nom']) || strtolower($_POST['new_prenom']) != strtolower($_POST['prenom']))){
+            $prepare = $bdd -> prepare('UPDATE ecrivains SET nom = :nom, prenom = :prenom WHERE id_ecrivains = :id_clause ');
+            $prepare->bindValue (':nom', strtolower($_POST['new_nom']));
+            $prepare->bindValue (':prenom', strtolower($_POST['new_prenom']));
+            $prepare->bindValue (':id_clause', $id_nom);
+            $res = $prepare -> execute ();
+
+            header ( 'Location: account.php');
+        }
+
+        if (isset($_POST['id_delete'])){
+            $prepare = $bdd -> prepare('UPDATE ecrivains SET mdp = " " WHERE id_ecrivains = :id_delete;');
+            $prepare->bindValue (':id_delete', $id_nom);
+            $res = $prepare -> execute ();
+
+            header ( 'Location: account.php');
+        }
 
         $tab_ecrivains = prepare ($bdd,'fetch', 'SELECT UPPER(nom) as nom, prenom FROM Ecrivains WHERE Ecrivains.id_ecrivains = :id',[':id' => $id_nom] );
 
-
-       /* $requete_prepare = $bdd->prepare ( 'SELECT UPPER(nom) as nom, prenom FROM Ecrivains WHERE Ecrivains.id_ecrivains = :id' );
-        $requete_prepare->bindValue ( ':id' , $id_nom , PDO::PARAM_INT );
-        $requete_prepare->execute ();
-        $tab_ecrivains = $requete_prepare->fetch( PDO::FETCH_ASSOC );
-        $requete_prepare -> closeCursor ();*/
     }
 }
-
-
-// Requête SQL pour récupérer toutes les infos du user
 
 
 ?>
@@ -39,7 +46,10 @@ if (isset($_POST['prenom'])){
 
     <link rel="stylesheet" href="https://use.typekit.net/kmv3lzq.css">
 
+    <link rel="shortcut icon" href="img/WLogo.ico" />
+
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/account.css">
 
     <link rel="stylesheet" href="css/header.css">
 </head>
@@ -48,45 +58,53 @@ if (isset($_POST['prenom'])){
 <?php // Importation de fonctions
 include 'source/header.php'; ?> <!--importation du header-->
 <div class="content">
+<?php if (isset($id_nom)) { ?>
+            <h1>Connecté</h1>
+            <form action="" method="post">
+                <input type="hidden" name="prenom" value="<?php echo $_POST['prenom'] ?>">
+                <input type="hidden" name="nom" value="<?php echo $_POST['nom'] ?>">
+                <input type="hidden" name="mdp" value="<?php echo $_POST['mdp'] ?>">
 
-<?php
-var_dump ($_POST);
-if (!isset($_POST['prenom']) ){?>
-    <h1>Connectez-vous</h1>
-    <form class="connetcion" method="post" action="">
 
-        <label for="nom">Nom</label>
-        <input type="text" placeholder="Souvignet" name="nom" id="nom" required>
+                <label for="nom">Votre nom</label>
+                <input type="text" id="nom" name="new_nom" value="<?php echo $tab_ecrivains['nom']?>">
 
-        <label for="prenom">Prenom</label>
-        <input type="text" placeholder="Baudry" name="prenom" id="prenom" required>
+                <label for="pre">Votre prenom</label>
+                <input type="text" name="new_prenom" id="pre" value="<?php echo ucfirst ($tab_ecrivains['prenom'])?>">
 
-        <label for="mdp">Mot de passe</label>
-        <input maxlength="30" minlength="10" type="password" placeholder="Votre mot de passe" name="mdp" id="mdp" required>
+                <input type="submit" class="button" value="Enregistrer">
+            </form>
 
-        <input type="submit" class="button" value="Se connecter">
+            <form class="two" method="post" >
+                <input type="hidden" name="prenom" value="<?php echo $_POST['prenom'] ?>">
+                <input type="hidden" name="nom" value="<?php echo $_POST['nom'] ?>">
+                <input type="hidden" name="mdp" value="<?php echo $_POST['mdp'] ?>">
+                <input type="hidden" name="id_delete" value="true">
 
-    </form>
+                <input class="button" type="submit" value="Supprimer l'accés a mon compte">
+            </form>
 
-<?php } else if (isset($id_nom)) { ?>
+            <p>Ne supprime pas les contenu crée.</p>
 
-<section>
-    <h1>Connecté</h1>
-    <form action="">
-        <label for="">Votre nom</label>
-        <input type="text" value="<?php echo $tab_ecrivains['nom']?>">
+<?php } else {
+?>
+            <h1>Connectez-vous</h1>
+            <form class="connetcion" method="post" action="">
 
-        <label for="">Votre prenom</label>
-        <input type="text" value="<?php echo ucfirst ($tab_ecrivains['prenom'])?>">
+                <label for="nom">Nom</label>
+                <input type="text" placeholder="Souvignet" name="nom" id="nom" required>
 
-        <input type="submit" class="button" value="Enregistrer">
-    </form>
+                <label for="prenom">Prenom</label>
+                <input type="text" placeholder="Baudry" name="prenom" id="prenom" required>
 
-    <a href="" class="button">Supprimer l'accés a mon compte</a>
+                <label for="mdp">Mot de passe</label>
+                <input maxlength="30" minlength="10" type="password" placeholder="Votre mot de passe" name="mdp" id="mdp"
+                       required>
 
-</section>
+                <input type="submit" class="button" value="Se connecter">
 
-<?php } ?>
+            </form>
+<?php }   ?>
 </div>
 
 </body>

@@ -31,34 +31,14 @@ if ( isset( $_GET[ 'trie' ] ) ) {
 }
 
 // Requête SQL pour récupérer le nom de la page associé au tag
-$requete_prepare = $bdd->prepare ( 'SELECT nom FROM Tag WHERE id_tag=:tag_id' );
-$requete_prepare->bindValue ( ':tag_id' , $_GET[ 'id' ] , PDO::PARAM_INT );
-$requete_prepare->execute ();
-$res_nom = $requete_prepare->fetch ( PDO::FETCH_ASSOC );
-$requete_prepare -> closeCursor ();
+$res_nom = prepare ($bdd, 'fetch', 'SELECT nom FROM Tag WHERE id_tag=:tag_id', [":tag_id" => $_GET[ 'id' ]]);
 
 // Requête SQL pour récupérer les tag assoicé
-
-$tab_tag_asso = $tab_ecrivains = prepare ($bdd,'fetchAll', 'SELECT tag.id_tag, Tag.nom FROM tag, Articles, Vconnect WHERE Tag.id_tag = Vconnect.id_tag AND Articles.id_article = Vconnect.id_article AND tag.id_tag != :tag_id ORDER BY RAND () LIMIT 10;' ,[':tag_id' => $_GET['id']] );
-
-/*$requete_prepare = $bdd->prepare ( 'SELECT tag.id_tag, Tag.nom FROM tag, Articles, Vconnect WHERE Tag.id_tag = Vconnect.id_tag AND Articles.id_article = Vconnect.id_article AND tag.id_tag != :tag_id ORDER BY RAND () LIMIT 10;' );
-$requete_prepare->bindValue ( ':tag_id' , $_GET[ 'id' ] , PDO::PARAM_INT );
-$requete_prepare->execute ();
-$tab_tag_asso = $requete_prepare->fetchAll ( PDO::FETCH_ASSOC );
-$requete_prepare -> closeCursor ();*/
+$tab_tag_asso = prepare ($bdd,'fetchAll', 'SELECT tag.id_tag, Tag.nom FROM tag, Articles, Vconnect WHERE Tag.id_tag = Vconnect.id_tag AND Articles.id_article = Vconnect.id_article AND tag.id_tag != :tag_id ORDER BY RAND () LIMIT 10;' ,[':tag_id' => $_GET['id']] );
 
 // Requête SQL pour récupérer les articles associés au tag, avec le nombre de vues
-$requete_prepare = $bdd->prepare ( 'SELECT DISTINCT COUNT(DISTINCT vues.id_vue) as vues_nbr, Articles.id_article, Articles.titre, Articles.contenue, Articles.img, UPPER(Ecrivains.nom) AS nom,Ecrivains.id_ecrivains, Ecrivains.prenom, Articles.date 
-FROM Articles
-LEFT JOIN vues ON Articles.id_article = vues.vue_id_article
-JOIN Ecrivains ON Articles.article_id_ecrivain = Ecrivains.id_ecrivains 
-JOIN Vconnect ON Articles.id_article = Vconnect.id_article 
-JOIN Tag ON Vconnect.id_tag = Tag.id_tag AND Tag.id_tag = :tag_article_id
-GROUP BY Articles.id_article ' . $groupeby );
-$requete_prepare->bindValue ( ':tag_article_id' , $_GET[ 'id' ] , PDO::PARAM_INT );
-$requete_prepare->execute ();
-$tab_acrticles = $requete_prepare->fetchAll ( PDO::FETCH_ASSOC );
-$requete_prepare -> closeCursor ();
+$requete_article = 'SELECT DISTINCT COUNT(DISTINCT vues.id_vue) as vues_nbr, Articles.id_article, Articles.titre, Articles.contenue, Articles.img, UPPER(Ecrivains.nom) AS nom,Ecrivains.id_ecrivains, Ecrivains.prenom, Articles.date FROM Articles LEFT JOIN vues ON Articles.id_article = vues.vue_id_article JOIN Ecrivains ON Articles.article_id_ecrivain = Ecrivains.id_ecrivains JOIN Vconnect ON Articles.id_article = Vconnect.id_article JOIN Tag ON Vconnect.id_tag = Tag.id_tag AND Tag.id_tag = :tag_article_id GROUP BY Articles.id_article ' . $groupeby;
+$tab_acrticles = prepare ($bdd, 'fetchAll', $requete_article, ['tag_article_id' => $_GET[ 'id' ]]);
 
 ?>
 
@@ -72,6 +52,8 @@ $requete_prepare -> closeCursor ();
     <meta name="description" content="Rédigez votre article sur notre site web. Découvrez nos astuces et conseils pour améliorer votre contenu et attirer plus de lecteurs.">
     <meta name="keywords" content="Rédaction, Article, Astuces, Conseils, Contenu, Lecteurs">
     <meta name="author" content="Souvignet Baudry">
+
+    <link rel="shortcut icon" href="img/WLogo.ico" />
 
     <link rel="stylesheet" href="css/global.css">
 
