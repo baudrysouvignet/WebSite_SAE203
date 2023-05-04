@@ -1,8 +1,26 @@
-.content {
+.content{
+    margin-top: 100px !important;
+    overflow: hidden;
+}
+
+.car {
+    display: flex;
+    gap: 100px;
+    width: fit-content;
+    margin-left: 0;
+
+    transition: 0.8s;
+}
+
+.content, .car > section {
+    height: calc(100vh - 200px) !important;
+}
+
+.car > section{
+    width: calc(100vw - 200px);
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 100px);
-    gap: 30px;
+    gap: 120px;
 }
 
 article {
@@ -46,4 +64,11 @@ article p {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+#playpause.pause:after{
+    content: ' en pause';
+}
+#playpause.play:after{
+    content: ' en marche';
 }

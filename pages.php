@@ -31,14 +31,14 @@ if ( isset( $_GET[ 'trie' ] ) ) {
 }
 
 // Requête SQL pour récupérer le nom de la page associé au tag
-$res_nom = prepare ($bdd, 'fetch', 'SELECT nom FROM Tag WHERE id_tag=:tag_id', [":tag_id" => $_GET[ 'id' ]]);
+$res_nom = prepare_fct ($bdd, 'fetch', 'SELECT nom FROM Tag WHERE id_tag=:tag_id', [":tag_id" => $_GET[ 'id' ]]);
 
 // Requête SQL pour récupérer les tag assoicé
-$tab_tag_asso = prepare ($bdd,'fetchAll', 'SELECT tag.id_tag, Tag.nom FROM tag, Articles, Vconnect WHERE Tag.id_tag = Vconnect.id_tag AND Articles.id_article = Vconnect.id_article AND tag.id_tag != :tag_id ORDER BY RAND () LIMIT 10;' ,[':tag_id' => $_GET['id']] );
+$tab_tag_asso = prepare_fct ($bdd,'fetchAll', 'SELECT DISTINCT tag.id_tag, Tag.nom FROM tag, Articles, Vconnect WHERE Tag.id_tag = Vconnect.id_tag AND Articles.id_article = Vconnect.id_article AND tag.id_tag != :tag_id ORDER BY nom;' ,[':tag_id' => $_GET['id']] );
 
 // Requête SQL pour récupérer les articles associés au tag, avec le nombre de vues
 $requete_article = 'SELECT DISTINCT COUNT(DISTINCT vues.id_vue) as vues_nbr, Articles.id_article, Articles.titre, Articles.contenue, Articles.img, UPPER(Ecrivains.nom) AS nom,Ecrivains.id_ecrivains, Ecrivains.prenom, Articles.date FROM Articles LEFT JOIN vues ON Articles.id_article = vues.vue_id_article JOIN Ecrivains ON Articles.article_id_ecrivain = Ecrivains.id_ecrivains JOIN Vconnect ON Articles.id_article = Vconnect.id_article JOIN Tag ON Vconnect.id_tag = Tag.id_tag AND Tag.id_tag = :tag_article_id GROUP BY Articles.id_article ' . $groupeby;
-$tab_acrticles = prepare ($bdd, 'fetchAll', $requete_article, ['tag_article_id' => $_GET[ 'id' ]]);
+$tab_acrticles = prepare_fct ($bdd, 'fetchAll', $requete_article, ['tag_article_id' => $_GET[ 'id' ]]);
 
 ?>
 
@@ -139,6 +139,7 @@ HTML;
         <h2>D'autres <span class="color">#sujet</span></h2>
         <div class="tag">
             <?php
+            // affiche tout les tag pour facilité la navigation pour le user
             foreach ($tab_tag_asso as $value){
                 echo <<<HTML
                 <a href='pages.php?id={$value['id_tag']}' class="button"><span class="color">#</span>{$value['nom']}</a>

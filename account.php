@@ -3,10 +3,15 @@
 include 'source/php_request_header.php'; // Requête pour le header et importation de $bdd
 include 'source/function.php';
 
+// si l'utilisateur a rempli le formulaire
 if (isset($_POST['prenom'])){
+    //on verifie ca connection
     include 'source/verif_compte.php';
+
+    // si le user a rentrer les bonnes infos
     if (isset($id_nom)){
-        // Requête SQL pour récupérer toutes les info de l'utilisateur
+
+        //si le user modifie ces information
         if (isset($_POST['new_nom']) && $_POST['new_prenom'] && (strtolower($_POST['new_nom']) != strtolower($_POST['nom']) || strtolower($_POST['new_prenom']) != strtolower($_POST['prenom']))){
             $prepare = $bdd -> prepare('UPDATE ecrivains SET nom = :nom, prenom = :prenom WHERE id_ecrivains = :id_clause ');
             $prepare->bindValue (':nom', strtolower($_POST['new_nom']));
@@ -14,18 +19,24 @@ if (isset($_POST['prenom'])){
             $prepare->bindValue (':id_clause', $id_nom);
             $res = $prepare -> execute ();
 
+            //deconnect le user de force
             header ( 'Location: account.php');
         }
 
+        //si le user modifie supprime l'accée a son compte
         if (isset($_POST['id_delete'])){
+            //on ne supprime pas toutes les data pour éviter d'avoir des articles sans ecrivains
+            //on remplace le hash du mdp par " " pour qu'aucun hash mdp puisse convenir et ainsi clore l'accée au compte
             $prepare = $bdd -> prepare('UPDATE ecrivains SET mdp = " " WHERE id_ecrivains = :id_delete;');
             $prepare->bindValue (':id_delete', $id_nom);
             $res = $prepare -> execute ();
 
+            //deconnect le user de force
             header ( 'Location: account.php');
         }
 
-        $tab_ecrivains = prepare ($bdd,'fetch', 'SELECT UPPER(nom) as nom, prenom FROM Ecrivains WHERE Ecrivains.id_ecrivains = :id',[':id' => $id_nom] );
+        // si aucun des deux cas est verifier alors on recupére les infos pour les afficher dans les input
+        $tab_ecrivains = prepare_fct ($bdd,'fetch', 'SELECT UPPER(nom) as nom, prenom FROM Ecrivains WHERE Ecrivains.id_ecrivains = :id',[':id' => $id_nom] );
 
     }
 }
@@ -58,9 +69,13 @@ if (isset($_POST['prenom'])){
 <?php // Importation de fonctions
 include 'source/header.php'; ?> <!--importation du header-->
 <div class="content">
+
+    <!--si le user est deja connecté-->
 <?php if (isset($id_nom)) { ?>
+            <!--on remplace les values par les data pour facilité la modifictaion-->
             <h1>Connecté</h1>
             <form action="" method="post">
+                <!--on ajoute des champ cacher pour renvoyer les id de connection afin de verifier en cas d'action de l'utilisateur-->
                 <input type="hidden" name="prenom" value="<?php echo $_POST['prenom'] ?>">
                 <input type="hidden" name="nom" value="<?php echo $_POST['nom'] ?>">
                 <input type="hidden" name="mdp" value="<?php echo $_POST['mdp'] ?>">
@@ -75,7 +90,9 @@ include 'source/header.php'; ?> <!--importation du header-->
                 <input type="submit" class="button" value="Enregistrer">
             </form>
 
+            <!--formulaire dedier a la suppression d'informations-->
             <form class="two" method="post" >
+                <!--on ajoute des champ cacher pour renvoyer les id de connection afin de verifier en cas d'action de l'utilisateur-->
                 <input type="hidden" name="prenom" value="<?php echo $_POST['prenom'] ?>">
                 <input type="hidden" name="nom" value="<?php echo $_POST['nom'] ?>">
                 <input type="hidden" name="mdp" value="<?php echo $_POST['mdp'] ?>">
@@ -88,7 +105,13 @@ include 'source/header.php'; ?> <!--importation du header-->
 
 <?php } else {
 ?>
+        <!--formulaire de connection-->
             <h1>Connectez-vous</h1>
+            <?php
+            if (isset($_POST['prenom']) && !isset($id_nom)) {
+                echo '<p style="color: red;">Les informations sont incorrect. Ecrivez un article au préalable.</p>';
+            }
+            ?>
             <form class="connetcion" method="post" action="">
 
                 <label for="nom">Nom</label>

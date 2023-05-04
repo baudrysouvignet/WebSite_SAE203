@@ -10,7 +10,8 @@ function compare( $data1, $data2, $respos, $resneg){
     }
 }
 
-function prepare($bdd, $fetch, $sql, $tab){
+// La fonction prepare_fct cpermet de récuperer des données de la database $bdd en selctionnat le $fecth et en donnant les variable dans $tab
+function prepare_fct($bdd, $fetch, $sql, $tab){
     $requete_prepare = $bdd->prepare ( $sql);
 
     foreach ($tab as $key => $val){

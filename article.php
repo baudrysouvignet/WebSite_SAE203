@@ -10,7 +10,7 @@ if ( ! isset( $_GET[ 'id' ] ) ) {
 }
 
 // Requête SQL pour récupérer toutes les info de l'article
-$tab_article = prepare ($bdd, 'fetch', 'SELECT titre, contenue, img FROM Articles WHERE Articles.id_article = :article', [':article'=>$_GET[ 'id' ]]);
+$tab_article = prepare_fct ($bdd, 'fetch', 'SELECT titre, contenue, img FROM Articles WHERE Articles.id_article = :article', [':article'=>$_GET[ 'id' ]]);
 
 if (empty($tab_article)){
     // Redirection vers la page d'accueil si l'article n'existe pas
@@ -19,7 +19,7 @@ if (empty($tab_article)){
 }
 
 // Requête SQL pour récupérer la date de la derniere vue pour l'ip
-$tab_vues = prepare ($bdd, 'fetch','SELECT * FROM vues WHERE ip=:ip AND vue_id_article = :article ORDER BY date DESC', [":ip" => $_SERVER['REMOTE_ADDR'], ":article" => $_GET[ 'id' ]] );
+$tab_vues = prepare_fct ($bdd, 'fetch','SELECT * FROM vues WHERE ip=:ip AND vue_id_article = :article ORDER BY date DESC', [":ip" => $_SERVER['REMOTE_ADDR'], ":article" => $_GET[ 'id' ]] );
 
 // Si aucune vue n'a été enregistrée pour cette adresse IP ou si la dernière vue enregistrée remonte à plus de 5 minutes,
 if (empty($tab_vues) || ((int) DateTime::createFromFormat('d/m/y H:i', $tab_vues['date'])->diff(DateTime::createFromFormat('d/m/y H:i', date('d/m/y H:i')))->i > 5)) {

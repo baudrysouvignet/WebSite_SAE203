@@ -3,9 +3,9 @@
 include 'source/php_request_header.php'; // Requête pour le header et importation de $bdd
 include 'source/function.php';
 
-$requete = 'SELECT * FROM Articles ORDER BY rand() LIMIT 1;';
+$requete = 'SELECT * FROM Articles ORDER BY date LIMIT 5;';
 $res = $bdd -> query($requete);
-$tab_article = $res -> fetch (PDO::FETCH_ASSOC);
+$tab_article = $res -> fetchAll(PDO::FETCH_ASSOC);
 $res -> closeCursor ();
 
 ?>
@@ -25,6 +25,8 @@ $res -> closeCursor ();
 
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/index.css">
+
+    <script src="js/carrousel.js" defer></script>
 </head>
 
 <body>
@@ -32,20 +34,39 @@ $res -> closeCursor ();
 include 'source/header.php';
 ?> <!--importation du header-->
 
-<div class="content">
-    <span class="tag button">Article ephemere</span>
-    <article>
-        <h1><?php echo $tab_article['titre'] ?></h1>
-        <div class="more">
-            <p><?php echo $tab_article['contenue'] ?></p>
-            <a href="article.php?id=<?php echo $tab_article['id_article'] ?>" class="button">Lire l'article</a></div>
-    </article>
-    
-    <div class="img" style="background-image: url('<?php echo $tab_article['img'] ?>')"></div>
-    
+<div class="navCar" style="display: flex; justify-content: center">
+    <button class="carBtn" id="left">Left</button>
+    <button class="carBtn" id="right">Right</button>
+    <button class="pause" id="playpause">Mettre</button>
+</div>
+
+<div class="content" id="carContent">
+    <div class="car" id="car">
+
+    <?php
+
+    foreach ($tab_article as $article){
+        echo <<<HTML
+            <section>
+                    <article>
+                        <h1>{$article["titre"]}</h1>
+                        <div class="more">
+                            <p>{$article['contenue']}</p>
+                            <a href="article.php?id="{$article['id_article']}" class="button">Lire l'article</a></div>
+                    </article>
+            
+                    <div class="img" style="background-image: url('{$article['img']}')"></div>
+                </section>
+HTML;
+
+    }
+
+    ?>
+    </div>
 </div>
 
 </body>
 
 <script src="https://kit.fontawesome.com/db392bfedc.js" crossorigin="anonymous"></script>
+
 </html>

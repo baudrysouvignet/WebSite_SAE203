@@ -1,4 +1,5 @@
 <?php
+    // récupération de la page actuelle
     $page = basename($_SERVER['PHP_SELF']);
 ?>
 
@@ -13,22 +14,23 @@
         </div>
 
         <?php
-        foreach ($tab as $key => $value){ /*affiche les 3 premiers icons*/
+        foreach ($tab as $key => $value){ /*affiche les 3 premiers icons depuis le doc php_request_header.php*/
             $id = $value['id_tag'];
             $icon = $value['icon'];
             $nom = str_replace(' ', '&nbsp;', $value['nom']); /*remplacer les espaces par des espces inséquable*/
             $class = 'link';
 
+            // gére la spécaficité des 3 tag dans le header pour le activate
             if ($page == 'pages.php'){
                 $class = $_GET['id'] == $value['id_tag'] ? 'active' : 'no-active';
             }
 
             echo <<<HTML
-<div>
-    <a href="pages.php?id=$id" class="$class"><i class="fa-solid fa-$icon"></i></a>
-    <span><span class="color">#</span>$nom</span>
-</div>
-HTML;
+                <div>
+                    <a href="pages.php?id=$id" class="$class"><i class="fa-solid fa-$icon"></i></a>
+                    <span><span class="color">#</span>$nom</span>
+                </div>
+            HTML;
         } ?>
     </nav>
     <nav>

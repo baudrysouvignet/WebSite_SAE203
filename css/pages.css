@@ -89,6 +89,7 @@ article:not(article:first-child){
 /* aside */
 
 aside {
+    overflow: scroll;
     position: fixed;
     top: 0;
     right: 0;

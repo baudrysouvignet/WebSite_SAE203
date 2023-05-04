@@ -1,4 +1,4 @@
-// sélectionne les éléments .filtre et #affiche
+/*déclarations des variables*/
 var elements = document.querySelectorAll('.filtre, #affiche');
 const filtre = document.querySelector('.filtre');
 const popup = document.querySelector('#popup');
