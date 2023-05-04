@@ -81,7 +81,7 @@ function change(type) {
     let taille = carContent.clientWidth + carContentGap;
     let carWidth = parseInt(window.getComputedStyle(car).marginLeft);
 
-    if (type == 'left'){
+    if (type === 'left'){
         mooveLeft(taille, carWidth)
     } else {
         mooveRight(taille, carWidth)
