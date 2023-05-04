@@ -1,3 +1,9 @@
+/*----------------------------------------------------------------------------------------------------------------------
+Objectif créer un carousel interactif.
+Difficulté supplémentaire, pouvoir utiliser simultanément le mode défilement automatique et les buttons sans interférence
+----------------------------------------------------------------------------------------------------------------------*/
+
+
 /*déclarations des variables*/
 
 let car = document.querySelector('#car');
@@ -11,7 +17,7 @@ let autoScrollIntervalId = null;
 /*fonctions de déplacement*/
 
 /**
- * Incrémente a gauche le carrousel
+ * Incrémente à gauche le carrousel
  *
  * @param {int} taille - Taille d'une slide
  * @param {int} carWidth - Taille du content des slides
@@ -19,14 +25,14 @@ let autoScrollIntervalId = null;
 function mooveRight(taille, carWidth){
     /*Comparaison pour savoir si le caroussel est à la fin*/
     if (carWidth > (-(carContent.clientWidth + carContentGap) * 4)){
-        car.style.marginLeft = carWidth - taille + "px"; /*incrémente d'un a gauche le carroussel*/
+        car.style.marginLeft = carWidth - taille + "px"; /*incrémente de un à gauche le carroussel*/
     } else {
         car.style.marginLeft = "0px" /*retourne au début*/
     }
 }
 
 /**
- * Incrémente a droite le carrousel
+ * Incrémente à droite le carrousel
  *
  * @param {int} taille - Taille d'une slide
  * @param {int} carWidth - Taille du content des slides
@@ -34,7 +40,7 @@ function mooveRight(taille, carWidth){
 function mooveLeft(taille, carWidth) {
     /*Comparaison pour savoir si le caroussel est au début*/
     if (carWidth < 0){
-        car.style.marginLeft = carWidth + taille + "px";/*incrémente d'un a droite le carroussel*/
+        car.style.marginLeft = carWidth + taille + "px";/*incrémente de un à droite le carroussel*/
     } else {
         let last = (carContent.clientWidth + carContentGap) * 4 ;
         car.style.marginLeft = carWidth - last + "px"; /*retourne au début*/
@@ -96,32 +102,32 @@ document.querySelector('#playpause').addEventListener('click', function (){
         startAuto();
     }
 
-    /*change les class de l'élément*/
+    /*change-les class de l'élément*/
     this.classList.toggle('pause')
     this.classList.toggle('play')
 })
 
 /**
- * Parcours tout les éléments de carBtns
+ * Parcours tous les éléments de carBtns
  *
  * fonction qui écoute le click de chaque élément
  */
 carBtns.forEach(function(element) {
     element.addEventListener('click', function() {
 
-        /*Verifie le temps du dernier click pour éviter des décalage*/
+        /*Verifie le temps du dernier click pour éviter du décalage*/
         let now = new Date().getTime();
         if (now - lastClickTime < 800) {
-            /*Si ca fait moins de 800ms on arrete tout*/
+            /*Si ça fait moins de 800ms on arrête tout*/
             return;
         }
-        /*Remplace avec le temps actuelle (dernier click)*/
+        /*Remplace avec le temps actuel (dernier click)*/
         lastClickTime = now;
 
-        /*Reset le timer de 5s pour éviter d'en créer un nouveau a chaque click et donc créer énormement de bug */
+        /*Reset le timer de 5s pour éviter d'en créer un nouveau à chaque click et donc créer énormement de bug */
         resetAuto();
 
-        /*Incrémente le carrousel dépendement du bouttons sur le quelle on click*/
+        /*Incrémente le carrousel dépendement du bouttons sur le quelle on clique*/
         change(this.id)
 
     });
