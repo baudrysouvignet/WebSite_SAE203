@@ -110,6 +110,10 @@ aside .state {
     gap: 30px;
 }
 
+aside .state > div * {
+    color: #1D1D1B;
+}
+
 aside .state > div {
     border-radius: 20px;
     flex-grow: 1;
@@ -121,6 +125,7 @@ aside .state > div {
     justify-content: center;
     gap: 20px;
 }
+
 aside .state > div i,
 aside .state > div span{
     font-weight: 700;
@@ -142,7 +147,7 @@ aside .tag {
 }
 
 aside .tag a {
-    color: var(--black);
+    color: #1D1D1B;
     background-color: white;
 }
 aside .tag a:hover,

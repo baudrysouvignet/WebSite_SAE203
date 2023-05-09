@@ -3,7 +3,7 @@
 include 'source/php_request_header.php'; // Requête pour le header et importation de $bdd
 include 'source/function.php';
 
-$requete = 'SELECT * FROM Articles ORDER BY date LIMIT 5;';
+$requete = 'SELECT * FROM Articles ORDER BY date LIMIT 4;';
 $res = $bdd -> query($requete);
 $tab_article = $res -> fetchAll(PDO::FETCH_ASSOC);
 $res -> closeCursor ();
@@ -27,6 +27,7 @@ $res -> closeCursor ();
     <link rel="stylesheet" href="css/index.css">
 
     <script src="js/carrousel.js" defer></script>
+    <script src="js/global.js" defer></script>
 </head>
 
 <body>
@@ -34,13 +35,14 @@ $res -> closeCursor ();
 include 'source/header.php';
 ?> <!--importation du header-->
 
-<div class="navCar" style="display: flex; justify-content: center">
-    <button class="carBtn" id="left">Left</button>
-    <button class="carBtn" id="right">Right</button>
-    <button class="pause" id="playpause">Mettre</button>
-</div>
+
 
 <div class="content" id="carContent">
+    <div class="navCar" style="display: flex; justify-content: center">
+        <button class="carBtn button" id="left"> < </button>
+        <button class="pause button" id="playpause">Défilement automatique</button>
+        <button class="carBtn button" id="right"> > </button>
+    </div>
     <div class="car" id="car">
 
     <?php
@@ -52,7 +54,7 @@ include 'source/header.php';
                         <h1>{$article["titre"]}</h1>
                         <div class="more">
                             <p>{$article['contenue']}</p>
-                            <a href="article.php?id="{$article['id_article']}" class="button">Lire l'article</a></div>
+                            <a href="article.php?id={$article['id_article']}" class="button">Lire l'article</a></div>
                     </article>
             
                     <div class="img" style="background-image: url('{$article['img']}')"></div>
@@ -64,7 +66,6 @@ HTML;
     ?>
     </div>
 </div>
-
 </body>
 
 <script src="https://kit.fontawesome.com/db392bfedc.js" crossorigin="anonymous"></script>

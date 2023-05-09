@@ -6,6 +6,28 @@
             'opsz' 35
 }
 
+:root {
+    --black: #F5F5F5;
+    --white: #1D1D1B;
+
+    --main: #8BC7FF;
+    --secondary: #C44300;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --black: #1D1D1D;
+        --white: #F5F5F5;
+
+        --main: #8BC7FF;
+        --secondary: #C44300;
+    }
+}
+
+.invalid {
+    border: solid 1px #bf5a5a;
+}
+
 body{
     background-color: var(--white);
 }
@@ -13,18 +35,11 @@ body{
 *{
     margin: 0;
     padding: 0;
-}
-
-:root {
-    --black: #1D1D1B;
-    --white: #F5F5F5;
-
-    --main: #8BC7FF;
-    --secondary: #C44300;
+    color: var(--black);
 }
 
 
-h1, h2, span, a, p, textarea:not(.article), label {
+h1, h2, h3, span, a, p, textarea:not(.article), label {
     font-family: "rival-sans", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -54,9 +69,9 @@ a, .button{
 .button {
     background-color: var(--main);
     border-radius: 50px;
-    padding: 10px 30px;
+    padding: 10px 30px !important;
     transition: 0.5s;
-    width: fit-content;
+    width: fit-content !important;
     color: var(--black);
 }
 .button:hover {
@@ -84,4 +99,33 @@ a, .button{
 
 .filtre.unactive {
     display: none;
+}
+
+.navCar {
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+
+    bottom: 30px;
+    background-color: var(--secondary);
+    border-radius: 100px;
+}
+
+.navCar > * {
+    background-color: var(--secondary) !important;
+    color: white !important;
+    border-radius: 0;
+}
+
+.navCar > *:last-child {
+    border-radius: 0 100px 100px 0;
+}
+
+.navCar > *:first-child {
+    border-radius: 100px 0 0 100px;
+}
+
+.navCar > *:hover {
+    background-color: var(--main) !important;
+    color: black !important;
 }

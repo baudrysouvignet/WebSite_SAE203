@@ -5,30 +5,46 @@
     gap: 50px;
     height: calc(100vh - 50px);
 }
+.titreContent {
+    margin-top: 50px;
+    margin-bottom: -50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-form {
+.titlebis {
+    margin-top: 30px;
+}
+
+.form {
     display: flex;
     flex-direction: column;
 
     height: fit-content;
 }
 
-form input {
+.form input, select {
     padding: 15px 30px;
+
     width: 200px;
 }
-form label {
+select{
+    width: 264px!important;
+}
+.form label {
     margin-top: 20px;
     margin-bottom: 5px;
     opacity: 0.3;
 }
 
-form input:last-child{
+.form input:last-child{
     margin: 0 auto;
     margin-top: 30px;
 }
 
-form.two > input {
+.form.two > input {
+    width: fit-content;
     margin-top: -20px;
     font-size: 12px;
     background-color: var(--black);

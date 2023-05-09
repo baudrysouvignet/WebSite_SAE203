@@ -67,8 +67,8 @@ article p {
 }
 
 #playpause.pause:after{
-    content: ' en pause';
+    content: ' pause';
 }
 #playpause.play:after{
-    content: ' en marche';
+    content: ' play';
 }

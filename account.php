@@ -36,7 +36,7 @@ if (isset($_POST['prenom'])){
         }
 
         // si aucun des deux cas est verifier alors on recupére les infos pour les afficher dans les input
-        $tab_ecrivains = prepare_fct ($bdd,'fetch', 'SELECT UPPER(nom) as nom, prenom FROM Ecrivains WHERE Ecrivains.id_ecrivains = :id',[':id' => $id_nom] );
+        $tab_ecrivains = prepare_fct ($bdd,'fetch', 'SELECT UPPER(nom) as nom, prenom, id_ecrivains FROM Ecrivains WHERE Ecrivains.id_ecrivains = :id',[':id' => $id_nom] );
 
     }
 }
@@ -63,6 +63,8 @@ if (isset($_POST['prenom'])){
     <link rel="stylesheet" href="css/account.css">
 
     <link rel="stylesheet" href="css/header.css">
+    <script src="js/global.js" defer></script>
+    <script src="js/filterliste.js" defer></script>
 </head>
 
 <body>
@@ -71,10 +73,17 @@ include 'source/header.php'; ?> <!--importation du header-->
 <div class="content">
 
     <!--si le user est deja connecté-->
-<?php if (isset($id_nom)) { ?>
+<?php if (isset($id_nom)) {
+            $onlyread = '';
+            if ($tab_ecrivains['id_ecrivains'] == '0'){
+               $onlyread = 'readonly="readonly"';
+               echo '<h1>Connecté sur un compte de test (readonly)</h1>';
+            }else{
+                echo '<h1>Connecté</h1>';
+            }
+            ?>
             <!--on remplace les values par les data pour facilité la modifictaion-->
-            <h1>Connecté</h1>
-            <form action="" method="post">
+            <form class="form" action="" method="post">
                 <!--on ajoute des champ cacher pour renvoyer les id de connection afin de verifier en cas d'action de l'utilisateur-->
                 <input type="hidden" name="prenom" value="<?php echo $_POST['prenom'] ?>">
                 <input type="hidden" name="nom" value="<?php echo $_POST['nom'] ?>">
@@ -82,16 +91,16 @@ include 'source/header.php'; ?> <!--importation du header-->
 
 
                 <label for="nom">Votre nom</label>
-                <input type="text" id="nom" name="new_nom" value="<?php echo $tab_ecrivains['nom']?>">
+                <input <?php echo $onlyread; ?> type="text" id="nom" name="new_nom" value="<?php echo $tab_ecrivains['nom']?>">
 
                 <label for="pre">Votre prenom</label>
-                <input type="text" name="new_prenom" id="pre" value="<?php echo ucfirst ($tab_ecrivains['prenom'])?>">
+                <input <?php echo $onlyread; ?> type="text" name="new_prenom" id="pre" value="<?php echo ucfirst ($tab_ecrivains['prenom'])?>">
 
                 <input type="submit" class="button" value="Enregistrer">
             </form>
 
             <!--formulaire dedier a la suppression d'informations-->
-            <form class="two" method="post" >
+            <form class="form two" method="post" >
                 <!--on ajoute des champ cacher pour renvoyer les id de connection afin de verifier en cas d'action de l'utilisateur-->
                 <input type="hidden" name="prenom" value="<?php echo $_POST['prenom'] ?>">
                 <input type="hidden" name="nom" value="<?php echo $_POST['nom'] ?>">
@@ -103,6 +112,32 @@ include 'source/header.php'; ?> <!--importation du header-->
 
             <p>Ne supprime pas les contenu crée.</p>
 
+            <div class="titreContent">
+                <h2>Gérer vos amitiés</h2>
+                <h3 class="titlebis">Ajouter un ami</h3>
+            </div>
+
+            <div class="form">
+                <label for="nom">Nom</label>
+                <input class="addFriendsInput" type="text" placeholder="<?php echo $_POST['prenom'] ?>" id="addName">
+
+                <label for="addRegion">Region</label>
+                <select name="addRegion" id="addRegion"></select>
+
+                <input type="submit" class="button" id="addButton" value="Ajouter un ami"></input>
+            </div>
+            <div class="titreContent">
+                <h3 class="">Filtrer vos amis</h3>
+            </div>
+
+            <div class="">
+                <input class="flitreCheck" type="checkbox" name="checkboxNord" value="Nord">
+                <label for="checkboxNord">Amis au Nord</label>
+
+                <input class="flitreCheck" type="checkbox" name="checkboxSud" value="Sud">
+                <label for="checkboxSud">Amis au Sud</label>
+            </div>
+
 <?php } else {
 ?>
         <!--formulaire de connection-->
@@ -112,7 +147,7 @@ include 'source/header.php'; ?> <!--importation du header-->
                 echo '<p style="color: red;">Les informations sont incorrect. Ecrivez un article au préalable.</p>';
             }
             ?>
-            <form class="connetcion" method="post" action="">
+            <form class="form connetcion" method="post" action="">
 
                 <label for="nom">Nom</label>
                 <input type="text" placeholder="Souvignet" name="nom" id="nom" required>

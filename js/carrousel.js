@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------------------------------------------------
-Objectif créer un carousel interactif.
+Une integration Js est présente sur cette pasge, créer un carousel interactif.
 Difficulté supplémentaire, pouvoir utiliser simultanément le mode défilement automatique et les buttons sans interférence
 ----------------------------------------------------------------------------------------------------------------------*/
 
@@ -24,7 +24,7 @@ let autoScrollIntervalId = null;
  */
 function mooveRight(taille, carWidth){
     /*Comparaison pour savoir si le caroussel est à la fin*/
-    if (carWidth > (-(carContent.clientWidth + carContentGap) * 4)){
+    if (carWidth > (-(carContent.clientWidth + carContentGap) * (car.childElementCount-1))){
         car.style.marginLeft = carWidth - taille + "px"; /*incrémente de un à gauche le carroussel*/
     } else {
         car.style.marginLeft = "0px" /*retourne au début*/
@@ -42,7 +42,7 @@ function mooveLeft(taille, carWidth) {
     if (carWidth < 0){
         car.style.marginLeft = carWidth + taille + "px";/*incrémente de un à droite le carroussel*/
     } else {
-        let last = (carContent.clientWidth + carContentGap) * 4 ;
+        let last = (carContent.clientWidth + carContentGap) * (car.childElementCount-1) ;
         car.style.marginLeft = carWidth - last + "px"; /*retourne au début*/
     }
 }

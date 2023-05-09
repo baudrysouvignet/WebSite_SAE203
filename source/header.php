@@ -44,4 +44,24 @@
         </div>
     </nav>
 
+    <?php
+    if (basename($_SERVER['PHP_SELF']) == 'index.php') {
+        echo <<<HTML
+            <span class="info" id="infoHeader">
+              Le théme de votre site dépend du théme de votre ordinateur.
+              <i class="fa-solid fa-xmark"></i>
+            </span>
+        HTML;
+    }
+    if (basename($_SERVER['PHP_SELF']) == 'account.php') {
+        echo <<<HTML
+            <span class="info" id="infoHeader">
+              nom: test | prenom: test | mot-de-passe: supertest123
+              <i class="fa-solid fa-xmark"></i>
+            </span>
+        HTML;
+    }
+    ?>
+
+
 </header>

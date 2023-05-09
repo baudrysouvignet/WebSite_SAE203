@@ -43,6 +43,8 @@ form > textarea.article {
 }
 
 .popup {
+    box-shadow: 0 0 5px var(--black);
+
     z-index: 20;
     position: absolute;
 

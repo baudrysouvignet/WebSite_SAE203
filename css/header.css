@@ -1,4 +1,5 @@
 header {
+    z-index: 100;
     position: fixed;
 
     left: 0;
@@ -44,6 +45,10 @@ header div:hover > span {
     display: unset;
 }
 
+header i {
+    color: var(--white)!important;
+}
+
 header a {
     color: var(--white);
     font-size: 25px;
@@ -58,4 +63,23 @@ header a:hover {
 
 nav a:not(.active) {
     opacity: 0.3;
+}
+
+header .info {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    z-index: 100;
+    position: absolute;
+    background-color: var(--main);
+    bottom: 50px;
+    left: 100px;
+    padding: 20px 40px;
+    width: 300%;
+    border-radius: 0 100px 100px 0;
+}
+.info > * {
+    color: #1D1D1B !important;
 }
