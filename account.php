@@ -64,7 +64,9 @@ if (isset($_POST['prenom'])){
 
     <link rel="stylesheet" href="css/header.css">
     <script src="js/global.js" defer></script>
+    <?php if (isset($id_nom)) { ?>
     <script src="js/filterliste.js" defer></script>
+    <?php } ?>
 </head>
 
 <body>
@@ -131,23 +133,23 @@ include 'source/header.php'; ?> <!--importation du header-->
             </div>
 
             <div class="">
-                <input class="flitreCheck" type="checkbox" name="checkboxNord" value="NordE">
+                <input class="flitreCheck" type="checkbox" name="checkboxNord" value="NordE" checked>
                 <label for="checkboxNord">Amis au Nord-Est</label>
 
-                <input class="flitreCheck" type="checkbox" name="checkboxSud" value="SudE">
+                <input class="flitreCheck" type="checkbox" name="checkboxSud" value="SudE" checked>
                 <label for="checkboxSud">Amis au Sud-Est</label>
 
-                <input class="flitreCheck" type="checkbox" name="checkboxEst" value="NordO">
+                <input class="flitreCheck" type="checkbox" name="checkboxEst" value="NordO" checked>
                 <label for="checkboxEst">Amis au Nord-Ouest</label>
 
-                <input class="flitreCheck" type="checkbox" name="checkboxOuest" value="SudO">
+                <input class="flitreCheck" type="checkbox" name="checkboxOuest" value="SudO" checked>
                 <label for="checkboxOuest">Amis au Sud-Ouest</label>
             </div>
 
             <div class="">
                 <label for="outpoutSelect">Vos amis:</label>
                 <select name="outpoutSelect" id="outpoutSelect"></select>
-                <input type="submit" value="Supprimer" id="deleteUser">
+                <input class="button" type="submit" value="Supprimer" id="deleteUser">
             </div>
 
 <?php } else {

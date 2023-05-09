@@ -62,6 +62,11 @@ a, .button{
     color: var(--secondary);
 }
 
+input, select {
+    border: solid 1px var(--black);
+    background-color: var(--white);
+}
+
 .big_text {
     font-size: 50px;
 }
