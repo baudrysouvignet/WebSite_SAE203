@@ -37,12 +37,10 @@ let friends = [
 /*Declaration des variables*/
 const SelectRegion = document.querySelector('#addRegion')
 const InputName = document.querySelector('#addName')
-const InputAge = document.querySelector('#addAge')
 const button = document.querySelector('#addButton')
 const filtreRegionCheck = document.querySelectorAll('.flitreCheck')
-
-let nordValue = [];
-let sudValue = [];
+const deleteSelectOutpout = document.querySelector('#deleteUser');
+const OutpoutSelect = document.querySelector('#outpoutSelect');
 
 let nomsRegions = [];
 Region.forEach(function(region) {
@@ -71,12 +69,39 @@ function trouverIndex(regions, type) {
         }
     }
 
-    console.log(indexNord)
     return indexNord;
 }
 
+function filtreRegionNordE () {
+    if (document.querySelector('.flitreCheck[value="NordE"]').checked){
+         return friends.filter(friend => trouverIndex(Region , 'nord-est').includes(friend.numRegion));
+    } else {
+        return [];
+    }
+}
+function filtreRegionSudE () {
+    if (document.querySelector('.flitreCheck[value="SudE"]').checked){
+        return friends.filter(friend => trouverIndex(Region , 'sud-est').includes(friend.numRegion));
+    } else {
+        return [];
+    }
+}
 
+function filtreRegionSudO () {
+    if (document.querySelector('.flitreCheck[value="SudO"]').checked){
+        return friends.filter(friend => trouverIndex(Region , 'sud-ouest').includes(friend.numRegion));
+    } else {
+        return [];
+    }
+}
 
+function filtreRegionNordO () {
+    if (document.querySelector('.flitreCheck[value="NordO"]').checked){
+        return friends.filter(friend => trouverIndex(Region , 'nord-ouest').includes(friend.numRegion));
+    } else {
+        return [];
+    }
+}
 
 /*abonnement*/
 
@@ -105,26 +130,25 @@ button.addEventListener('click', function () {
 
 filtreRegionCheck.forEach(check => {
     check.addEventListener('change', function () {
+        OutpoutSelect.innerHTML = '';
 
-        if (this.value === 'Nord'){
-            if (this.checked){
-                nordValue = friends.filter(friend => trouverIndex(Region , 'nord').includes(friend.numRegion));
-            } else {
-                nordValue = [];
-            }
+        let nordEstValue = filtreRegionNordE();
+        let sudEstValue = filtreRegionSudE();
+        let nordOuestValue = filtreRegionNordO();
+        let sudOuestValue = filtreRegionSudO();
 
-        } else {
-            if (this.checked){
-                sudValue = friends.filter(friend => trouverIndex(Region , 'sud').includes(friend.numRegion));
-            } else {
-                sudValue = [];
-            }
-        }
-
-        const mergedArray = [...nordValue, ...sudValue];
+        const mergedArray = [...nordEstValue, ...sudEstValue, ...nordOuestValue, ...sudOuestValue];
         const uniqueArray = Array.from(new Set(mergedArray));
-        console.log(uniqueArray)
+        addOption(OutpoutSelect, uniqueArray.map(objet => objet.nom))
     });
 });
+
+deleteSelectOutpout.addEventListener('click', function () {
+    if (OutpoutSelect.length === 0) {
+        return;
+    }
+
+    console.log('audd');
+})
 
 addOption(SelectRegion, nomsRegions);

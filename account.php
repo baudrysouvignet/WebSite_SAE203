@@ -131,11 +131,23 @@ include 'source/header.php'; ?> <!--importation du header-->
             </div>
 
             <div class="">
-                <input class="flitreCheck" type="checkbox" name="checkboxNord" value="Nord">
-                <label for="checkboxNord">Amis au Nord</label>
+                <input class="flitreCheck" type="checkbox" name="checkboxNord" value="NordE">
+                <label for="checkboxNord">Amis au Nord-Est</label>
 
-                <input class="flitreCheck" type="checkbox" name="checkboxSud" value="Sud">
-                <label for="checkboxSud">Amis au Sud</label>
+                <input class="flitreCheck" type="checkbox" name="checkboxSud" value="SudE">
+                <label for="checkboxSud">Amis au Sud-Est</label>
+
+                <input class="flitreCheck" type="checkbox" name="checkboxEst" value="NordO">
+                <label for="checkboxEst">Amis au Nord-Ouest</label>
+
+                <input class="flitreCheck" type="checkbox" name="checkboxOuest" value="SudO">
+                <label for="checkboxOuest">Amis au Sud-Ouest</label>
+            </div>
+
+            <div class="">
+                <label for="outpoutSelect">Vos amis:</label>
+                <select name="outpoutSelect" id="outpoutSelect"></select>
+                <input type="submit" value="Supprimer" id="deleteUser">
             </div>
 
 <?php } else {
