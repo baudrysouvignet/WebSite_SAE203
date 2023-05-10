@@ -1,8 +1,8 @@
 <?php
     // modifiez les paramètres pour accéder à la BDD client
     $hote='sae203baudrysou.mmi-lepuy.fr';
-    $port='21';
-    $nom_bd='new203';
+    $port='22';
+    $nom_bd='basouvigne_admin203';
     $identifiant='basouvigne_admin203';
     $mot_de_passe='basouvadmin203';
     $encodage='utf8';
