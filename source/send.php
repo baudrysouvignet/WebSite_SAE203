@@ -18,7 +18,7 @@ if (!isset($id_nom)) {
     $mdp_hash = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
 
     //envoie les donnée a la bdd $bdd
-    $insert_query = "INSERT INTO Ecrivains (nom, prenom, mdp) VALUES (:nom, :prenom, :mdp)";
+    $insert_query = "INSERT INTO ecrivains (nom, prenom, mdp) VALUES (:nom, :prenom, :mdp)";
     $requete_prepare = $bdd->prepare($insert_query);
     $requete_prepare->execute([
         ':nom' => strtolower($_POST['nom']),
@@ -33,7 +33,7 @@ if (!isset($id_nom)) {
 
 /*2- L'article*/
 // on écrit l'article dans la base
-$insert_query = "INSERT INTO Articles (titre, date, contenue, img, temps_de_lecture, article_id_ecrivain) VALUES (:titre, :date, :contenue, :img, :temps_de_lecture, :article_id_ecrivain)";
+$insert_query = "INSERT INTO articles (titre, date, contenue, img, temps_de_lecture, article_id_ecrivain) VALUES (:titre, :date, :contenue, :img, :temps_de_lecture, :article_id_ecrivain)";
 $requete_prepare = $bdd->prepare($insert_query);
 $requete_prepare->execute([
     ':titre' => $_POST['title'],
@@ -60,7 +60,7 @@ for ($i = 1; $i<3; $i++){
     //si un nouveau tag est créer alors on evoie dans la bdd
     if (strlen($_POST['autre-tag_'.$i]) != 0){
 
-        $insert_query = "INSERT INTO Tag (nom, icon) VALUES (:nom, :icon)";
+        $insert_query = "INSERT INTO tag (nom, icon) VALUES (:nom, :icon)";
         $requete_prepare = $bdd->prepare($insert_query);
         $requete_prepare->execute([
             ':nom' => $autre,
@@ -81,7 +81,7 @@ for ($i = 1; $i<3; $i++){
 // créer la liaison entre l'article et les tags
 for ($i = 1; $i<3; $i++){
     $nom = 'tag_'.$i;
-    $insert_query = "INSERT INTO Vconnect (id_tag, id_article) VALUES (:tag, :article)";
+    $insert_query = "INSERT INTO vconnect (id_tag, id_article) VALUES (:tag, :article)";
     $requete_prepare = $bdd->prepare($insert_query);
     $requete_prepare->execute([
         ':tag' => $$nom,

@@ -3,7 +3,7 @@
 include 'source/php_request_header.php'; // Requête pour le header et importation de $bdd
 include 'source/function.php';
 
-$requete = 'SELECT * FROM Articles ORDER BY date DESC LIMIT 4;';
+$requete = 'SELECT * FROM articles ORDER BY date DESC LIMIT 4;';
 $res = $bdd -> query($requete);
 $tab_article = $res -> fetchAll(PDO::FETCH_ASSOC);
 $res -> closeCursor ();

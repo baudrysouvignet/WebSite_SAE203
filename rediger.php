@@ -3,7 +3,7 @@
 include 'source/php_request_header.php'; // Requête pour le header et importation de $bdd
 include 'source/function.php';
 
-$requet = 'SELECT id_tag, nom FROM Tag ORDER BY nom';
+$requet = 'SELECT id_tag, nom FROM tag ORDER BY nom';
 $res = $bdd -> query ($requet);
 $tab_tag = $res -> fetchAll (PDO::FETCH_ASSOC);
 $res->closeCursor ();

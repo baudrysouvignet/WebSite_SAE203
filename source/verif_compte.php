@@ -2,7 +2,7 @@
 <?php
 /// Requête SQL pour récupérer les écrivains
 
-$res_ecrivains = prepare_fct ($bdd, 'fetchAll', 'SELECT * FROM Ecrivains WHERE Ecrivains.nom = :nom AND Ecrivains.prenom = :prenom;', [':nom'=>strtolower($_POST['nom']),':prenom' => strtolower($_POST['prenom']) ], 'PDO::PARAM_STR');
+$res_ecrivains = prepare_fct ($bdd, 'fetchAll', 'SELECT * FROM ecrivains WHERE ecrivains.nom = :nom AND ecrivains.prenom = :prenom;', [':nom'=>strtolower($_POST['nom']),':prenom' => strtolower($_POST['prenom']) ], 'PDO::PARAM_STR');
 
 // Si on a trouvé des écrivains correspondant aux noms et prénoms fournis
 if (!empty($res_ecrivains)) {

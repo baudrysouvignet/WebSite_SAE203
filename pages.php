@@ -31,13 +31,13 @@ if ( isset( $_GET[ 'trie' ] ) ) {
 }
 
 // Requête SQL pour récupérer le nom de la page associé au tag
-$res_nom = prepare_fct ($bdd, 'fetch', 'SELECT nom FROM Tag WHERE id_tag=:tag_id', [":tag_id" => $_GET[ 'id' ]]);
+$res_nom = prepare_fct ($bdd, 'fetch', 'SELECT nom FROM tag WHERE id_tag=:tag_id', [":tag_id" => $_GET[ 'id' ]]);
 
 // Requête SQL pour récupérer les tag assoicé
-$tab_tag_asso = prepare_fct ($bdd,'fetchAll', 'SELECT DISTINCT tag.id_tag, Tag.nom FROM tag, Articles, Vconnect WHERE Tag.id_tag = Vconnect.id_tag AND Articles.id_article = Vconnect.id_article AND tag.id_tag != :tag_id ORDER BY nom;' ,[':tag_id' => $_GET['id']] );
+$tab_tag_asso = prepare_fct ($bdd,'fetchAll', 'SELECT DISTINCT tag.id_tag, tag.nom FROM tag, articles, vconnect WHERE tag.id_tag = vconnect.id_tag AND articles.id_article = vconnect.id_article AND tag.id_tag != :tag_id ORDER BY nom;' ,[':tag_id' => $_GET['id']] );
 
 // Requête SQL pour récupérer les articles associés au tag, avec le nombre de vues
-$requete_article = 'SELECT DISTINCT COUNT(DISTINCT vues.id_vue) as vues_nbr, Articles.id_article, Articles.titre, Articles.contenue, Articles.img, UPPER(Ecrivains.nom) AS nom,Ecrivains.id_ecrivains, Ecrivains.prenom, Articles.date FROM Articles LEFT JOIN vues ON Articles.id_article = vues.vue_id_article JOIN Ecrivains ON Articles.article_id_ecrivain = Ecrivains.id_ecrivains JOIN Vconnect ON Articles.id_article = Vconnect.id_article JOIN Tag ON Vconnect.id_tag = Tag.id_tag AND Tag.id_tag = :tag_article_id GROUP BY Articles.id_article ' . $groupeby;
+$requete_article = 'SELECT DISTINCT COUNT(DISTINCT vues.id_vue) as vues_nbr, articles.id_article, articles.titre, articles.contenue, articles.img, UPPER(ecrivains.nom) AS nom,ecrivains.id_ecrivains, ecrivains.prenom, articles.date FROM articles LEFT JOIN vues ON articles.id_article = vues.vue_id_article JOIN ecrivains ON articles.article_id_ecrivain = ecrivains.id_ecrivains JOIN vconnect ON articles.id_article = vconnect.id_article JOIN tag ON vconnect.id_tag = tag.id_tag AND tag.id_tag = :tag_article_id GROUP BY articles.id_article ' . $groupeby;
 $tab_acrticles = prepare_fct ($bdd, 'fetchAll', $requete_article, ['tag_article_id' => $_GET[ 'id' ]]);
 
 ?>

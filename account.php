@@ -36,7 +36,7 @@ if (isset($_POST['prenom'])){
         }
 
         // si aucun des deux cas est verifier alors on recupére les infos pour les afficher dans les input
-        $tab_ecrivains = prepare_fct ($bdd,'fetch', 'SELECT UPPER(nom) as nom, prenom, id_ecrivains FROM Ecrivains WHERE Ecrivains.id_ecrivains = :id',[':id' => $id_nom] );
+        $tab_ecrivains = prepare_fct ($bdd,'fetch', 'SELECT UPPER(nom) as nom, prenom, id_ecrivains FROM ecrivains WHERE ecrivains.id_ecrivains = :id',[':id' => $id_nom] );
 
     }
 }
