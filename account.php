@@ -60,6 +60,7 @@ if (isset($_POST['prenom'])){
     <link rel="shortcut icon" href="img/WLogo.ico" />
 
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/cssavance.css">
     <link rel="stylesheet" href="css/account.css">
 
     <link rel="stylesheet" href="css/header.css">

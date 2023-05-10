@@ -16,7 +16,7 @@ header {
 }
 
 header img {
-    cursor: pointer;
+    filter: var(--img);
 }
 
 header, nav {
@@ -62,7 +62,7 @@ header a:hover {
 }
 
 nav a:not(.active) {
-    opacity: 0.3;
+    opacity: 0.5;
 }
 
 header .info {
@@ -81,5 +81,5 @@ header .info {
     border-radius: 0 100px 100px 0;
 }
 .info > * {
-    color: #1D1D1B !important;
+    color: var(--black) !important;
 }

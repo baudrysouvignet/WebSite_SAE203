@@ -58,10 +58,14 @@ $tab_acrticles = prepare_fct ($bdd, 'fetchAll', $requete_article, ['tag_article_
     <link rel="stylesheet" href="css/global.css">
 
     <link rel="stylesheet" href="css/header.css">
+
+    <link rel="stylesheet" href="css/cssavance.css">
     <link rel="stylesheet" href="css/pages.css">
+    <script src="js/global.js" defer></script>
 </head>
 <body>
 <?php include 'source/header.php'; ?> <!--importation du header-->
+
 
 <div class="content">
     <div class="head">
@@ -89,8 +93,10 @@ HTML;
 
     <section>
         <?php
+        $num_delay = -0.6;
         // boucle qui itère sur chaque article à afficher
         foreach ( $tab_acrticles as $article ) {
+            $num_delay += 0.4;
             // formatage du prénom de l'auteur avec une majuscule en début de chaîne
             $prenom = ucfirst ( $article[ "prenom" ] );
             // formatage de la date au format jj/mm/aaaa
@@ -101,7 +107,7 @@ HTML;
 
             // affichage de chaque article avec les informations correspondantes
             echo <<<HTML
-<article onclick="window.location.href='article.php?id=$link'">
+<article onclick="window.location.href='article.php?id=$link'" class="anim_article" style="animation-delay: {$num_delay}s">
     <div class="img" style="background-image: url('{$article["img"]}')"></div>
     <div class="info">
         <span>Redigé par {$article["nom"]} $prenom <span class="color">@$id_ecrivain</span> - $date_fr</span>

@@ -3,7 +3,7 @@
 include 'source/php_request_header.php'; // Requête pour le header et importation de $bdd
 include 'source/function.php';
 
-$requete = 'SELECT * FROM Articles ORDER BY date LIMIT 4;';
+$requete = 'SELECT * FROM Articles ORDER BY date DESC LIMIT 4;';
 $res = $bdd -> query($requete);
 $tab_article = $res -> fetchAll(PDO::FETCH_ASSOC);
 $res -> closeCursor ();
@@ -24,6 +24,8 @@ $res -> closeCursor ();
     <link rel="stylesheet" href="css/global.css">
 
     <link rel="stylesheet" href="css/header.css">
+
+    <link rel="stylesheet" href="css/cssavance.css">
     <link rel="stylesheet" href="css/index.css">
 
     <script src="js/carrousel.js" defer></script>

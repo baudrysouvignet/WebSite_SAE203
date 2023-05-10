@@ -14,8 +14,9 @@
     gap: 56px;
 
     padding-bottom: 10px;
-    border-bottom: solid 1px rgba(29, 29, 27, 0.3);
+    border-bottom: solid 1px var(--black);
 }
+
 /* Désactivation d'un lien */
 .nav a.inactif {
     opacity: 0.3;
@@ -70,7 +71,7 @@ article p, article h2 {
 
 article p {
     margin-top: 20px;
-    height: 36px;
+    height: 45px;
 
 }
 
@@ -99,7 +100,7 @@ aside {
     width: calc(38% - 77px);
     height: 100vh;
 
-    border-left: solid 1px rgba(29, 29, 27, 0.3);
+    border-left: solid 1px var(--black);
 }
 
 aside .state {
@@ -111,7 +112,7 @@ aside .state {
 }
 
 aside .state > div * {
-    color: #1D1D1B;
+    color: #1D1D1B !important;
 }
 
 aside .state > div {

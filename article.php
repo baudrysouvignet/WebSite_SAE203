@@ -49,6 +49,8 @@ if (empty($tab_vues) || ((int) DateTime::createFromFormat('d/m/y H:i', $tab_vues
 
     <link rel="stylesheet" href="css/global.css">
 
+    <link rel="stylesheet" href="css/cssavance.css">
+
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/article.css">
 </head>

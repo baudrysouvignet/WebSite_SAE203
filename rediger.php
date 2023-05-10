@@ -21,6 +21,7 @@ $res->closeCursor ();
 
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/rediger.css">
+    <link rel="stylesheet" href="css/cssavance.css">
 
     <link rel="shortcut icon" href="img/WLogo.ico" />
 

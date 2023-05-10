@@ -39,7 +39,7 @@
             <span>Rediger&nbsp;votre&nbsp;article</span>
         </div>
         <div>
-            <a href="account.php"><i class="fa-solid fa-gear"></i></a>
+            <a href="account.php"><i  id="anim_setting" class="fa-solid fa-gear"></i></a>
             <span>Reglage&nbsp;de&nbsp;votre&nbsp;compte</span>
         </div>
     </nav>
@@ -62,6 +62,4 @@
         HTML;
     }
     ?>
-
-
 </header>

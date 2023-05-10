@@ -1,10 +1,10 @@
 <?php
     // modifiez les paramètres pour accéder à la BDD client
-    $hote='localhost';
-    $port='4444';
+    $hote='sae203baudrysou.mmi-lepuy.fr';
+    $port='21';
     $nom_bd='new203';
-    $identifiant='root';
-    $mot_de_passe='root';
+    $identifiant='basouvigne_admin203';
+    $mot_de_passe='basouvadmin203';
     $encodage='utf8';
     $options=array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES '.$encodage);
 

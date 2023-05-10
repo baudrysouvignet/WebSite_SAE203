@@ -12,16 +12,7 @@
 
     --main: #8BC7FF;
     --secondary: #C44300;
-}
-
-@media (prefers-color-scheme: light) {
-    :root {
-        --black: #1D1D1D;
-        --white: #F5F5F5;
-
-        --main: #8BC7FF;
-        --secondary: #C44300;
-    }
+    --img:contrast(0.5);
 }
 
 .invalid {

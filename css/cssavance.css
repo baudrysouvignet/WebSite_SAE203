@@ -1,0 +1,60 @@
+/*Ce fichier comporte 3 éléments du css avancé, beaucoup d'autre sont présent dans les autres fichier CSS*/
+
+/*Mode sombre selon le mode du navigateur*/
+@media (prefers-color-scheme: light) {
+    :root {
+        --black: #1D1D1D;
+        --white: #F5F5F5;
+
+        --main: #8BC7FF;
+        --secondary: #C44300;
+
+        --img:contrast(1);
+    }
+}
+
+
+/*Apparitions des articles page article.php*/
+
+.anim_article {
+    transform: translateX(-150%);
+    animation: slide 0.6s forwards;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(-150%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
+
+/*Rouage du parametre qui tourne*/
+
+#anim_setting {
+    transform: rotate(0);
+    animation: setting 3s infinite;
+}
+
+@keyframes setting {
+    0% {
+        transform: rotate(0);
+    }
+
+    20% {
+        transform: rotate(50deg);
+    }
+    30% {
+        transform: rotate(50deg);
+    }
+    60% {
+        transform: rotate(-20deg);
+    }
+    100% {
+        transform: rotate(20deg);
+    }
+}
+
+/*Faire rotate la lune au hover*/
