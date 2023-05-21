@@ -1,5 +1,7 @@
 /*---------------------------------------------------------------------------------------------------------
 Ce code Js est nécessaire a l'ux design lors de la partie 1, il ne fait donc pas partie des 3 intégrations
+
+Il ne fait pas partie des 3 intégrations
 ---------------------------------------------------------------------------------------------------------*/
 
 /*déclarations des variables*/

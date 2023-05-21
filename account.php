@@ -179,7 +179,6 @@ include 'source/header.php'; ?> <!--importation du header-->
             </form>
 <?php }   ?>
 </div>
-
 </body>
 
 <script src="https://kit.fontawesome.com/db392bfedc.js" crossorigin="anonymous"></script>

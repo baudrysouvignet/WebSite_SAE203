@@ -19,8 +19,10 @@
 
 /* Désactivation d'un lien */
 .nav a.inactif {
-    opacity: 0.3;
     transition: 0.5s;
+}
+.nav a:not(.inactif){
+    color: var(--secondary);
 }
 /* Mise en évidence d'un lien au survol */
 .nav a:hover {

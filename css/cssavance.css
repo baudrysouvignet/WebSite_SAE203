@@ -57,4 +57,23 @@
     }
 }
 
-/*Faire rotate la lune au hover*/
+/*Souligner les liens de filtre*/
+.underlinelink {
+    position: relative;
+}
+
+.underlinelink:after {
+    content: "";
+    bottom: -12px;
+    left: 0;
+    position: absolute;
+    height: 3px;
+    width: 0;
+    background-color: var(--secondary);
+    transition: 0.5s;
+}
+.underlinelink:hover:after {
+    width: 100%;
+}
+
+/*Tout plein d'autre partie de CSS avancé (border-radius, shadow-box, :hover...)*/
