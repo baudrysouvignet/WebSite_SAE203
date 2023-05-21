@@ -58,7 +58,7 @@ Region.forEach(function(region) {
  * @param {object} element - Element <select> ou on ajoute lesw donnnée
  * @param {array} datas - Données a ajouter dans les options
  */
-function addOption(element, datas) {
+function addOption(element, ) {
     /*créer un option pour chaque élément*/
     datas.forEach(function (data, index){
         if (index === 0) {

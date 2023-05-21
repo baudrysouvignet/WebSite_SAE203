@@ -6,9 +6,9 @@ Difficulté supplémentaire, pouvoir utiliser simultanément le mode défilement
 
 /*déclarations des variables*/
 
-let car = document.querySelector('#car');
-let carContent = document.querySelector('#carContent');
-let carBtns = document.querySelectorAll('.carBtn');
+const car = document.querySelector('#car');
+const carContent = document.querySelector('#carContent');
+const carBtns = document.querySelectorAll('.carBtn');
 
 let carContentGap = 100;
 let lastClickTime = 0;

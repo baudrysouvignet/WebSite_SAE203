@@ -51,6 +51,14 @@
               Le théme de votre site dépend du théme de votre ordinateur.
               <i class="fa-solid fa-xmark"></i>
             </span>
+            <script>
+            const infoHeader = document.querySelector('#infoHeader');
+            
+            infoHeader.addEventListener('click', function () {
+                infoHeader.style.display = "none";
+            })
+            
+            </script>
         HTML;
     }
     if (basename($_SERVER['PHP_SELF']) == 'account.php') {
@@ -59,6 +67,14 @@
               nom: test | prenom: test | mot-de-passe: supertest123
               <i class="fa-solid fa-xmark"></i>
             </span>
+            <script>
+            const infoHeader = document.querySelector('#infoHeader');
+            
+            infoHeader.addEventListener('click', function () {
+                infoHeader.style.display = "none";
+            })
+            
+            </script>
         HTML;
     }
     ?>

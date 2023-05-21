@@ -35,10 +35,10 @@ include 'source/header.php'; ?> <!--importation du header-->
 <div class="content">
     <form method="post" action="source/send.php">
         <label style="display: none" for="title_request">Titre</label>
-        <textarea name="title" id="title_request" minlength="60" maxlength="100" class="big_text titleinput" rows="3" placeholder="Titre" required></textarea>
+        <textarea name="title" id="title_request" minlength="60" maxlength="100" class="big_text titleinput" rows="3" placeholder="Titre (80 caractère)" required></textarea>
 
         <label style="display: none" for="article_request">Titre</label>
-        <textarea name="article" id="article_request" class="article" placeholder="Si vous souhaitez creer des paragraphe, ajouter <br><br> à la fin de votre phrase" required></textarea>
+        <textarea name="article" id="article_request" class="article" placeholder="Votre article" required></textarea>
 
         <div class="tag">
             <?php

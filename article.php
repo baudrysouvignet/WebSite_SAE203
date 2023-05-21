@@ -10,7 +10,7 @@ if ( ! isset( $_GET[ 'id' ] ) ) {
 }
 
 // Requête SQL pour récupérer toutes les info de l'article
-$tab_article = prepare_fct ($bdd, 'fetch', 'SELECT titre, contenue, img FROM Articles WHERE Articles.id_article = :article', [':article'=>$_GET[ 'id' ]]);
+$tab_article = prepare_fct ($bdd, 'fetch', 'SELECT titre, contenue, img FROM articles WHERE articles.id_article = :article', [':article'=>$_GET[ 'id' ]]);
 
 if (empty($tab_article)){
     // Redirection vers la page d'accueil si l'article n'existe pas

@@ -84,7 +84,7 @@ $tab_acrticles = prepare_fct ($bdd, 'fetchAll', $requete_article, ['tag_article_
 
             // Affichage du lien HTML
             echo <<<HTML
-<a $href class="$class">$val</a>
+<a $href class="$class underlinelink">$val</a>
 HTML;
         }
 
@@ -106,6 +106,7 @@ HTML;
             $link =$article['id_article'];
 
             // affichage de chaque article avec les informations correspondantes
+            // ajout d'un onclick obligatoire pour rendre l'élément cliquable sans complexifier le JavaScript
             echo <<<HTML
 <article onclick="window.location.href='article.php?id=$link'" class="anim_article" style="animation-delay: {$num_delay}s">
     <div class="img" style="background-image: url('{$article["img"]}')"></div>
