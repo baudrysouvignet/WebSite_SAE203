@@ -1,3 +1,3 @@
 http://sae203baudrysou.mmi-lepuy.fr/index.php
 
-# Vice-lauréat au Festi- val MMI 2023
+# Runner-up at the 2023 MMI Festival
